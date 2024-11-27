@@ -1,0 +1,67 @@
+//HuynhNhu-2280602251
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Student
+{
+    public int Id{get;set;}
+    public string Name{get;set;}
+    public int Age{get;set;}
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, Name: {Name}, Age: {Age}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+
+        List<Student> students = new List<Student>
+        {
+            new Student{Id = 1,Name = "Anh",Age = 16},
+            new Student{Id = 2,Name = "Nhu",Age = 17},
+            new Student{Id = 3,Name = "Tuan",Age = 14},
+            new Student{Id = 4,Name = "Hung",Age = 19},
+            new Student{Id = 5,Name = "Vinh",Age = 18},
+            new Student{Id = 6,Name = "Kiet",Age = 15}
+        };
+
+        Console.WriteLine("Danh sach toan bo hoc sinh:");
+        foreach (var student in students)
+        {
+            Console.WriteLine(student);
+        }
+
+        var tuoitu15den18 = students.Where(s => s.Age >= 15 && s.Age <= 18);
+        Console.WriteLine("\nDanh sach hoc sinh co tuoi tu 15 den 18:");
+        foreach (var student in tuoitu15den18)
+        {
+            Console.WriteLine(student);
+        }
+
+        var tenbatdaubangA = students.Where(s => s.Name.StartsWith("A"));
+        Console.WriteLine("\nDanh sach hoc sinh co ten bat dau bang chu 'A':");
+        foreach (var student in tenbatdaubangA)
+        {
+            Console.WriteLine(student);
+        }
+
+        int tongtuoi = students.Sum(s => s.Age);
+        Console.WriteLine($"\nTong tuoi cua tat ca hoc sinh: {tongtuoi}");
+
+        var tuoilonnhat = students.OrderByDescending(s => s.Age).First();
+        Console.WriteLine("\nHoc sinh co tuoi lon nhat:");
+        Console.WriteLine(tuoilonnhat);
+
+        var tuoitangdan = students.OrderBy(s => s.Age).ToList();
+        Console.WriteLine("\nDanh sach hoc sinh sau khi sap xep theo tuoi tang dan:");
+        foreach (var student in tuoitangdan)
+        {
+            Console.WriteLine(student);
+        }
+    }
+}
